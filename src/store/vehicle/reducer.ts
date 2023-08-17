@@ -47,6 +47,20 @@ export const vehicleReducer = (
                 vehicleById: action.payload,
             };
         }
+        case CONSTANTS.GET_VEHICLES_BY_BRAND_FAILURE: {
+            return {
+                ...state,
+                fetchStatus: "fail",
+                error: action.payload,
+            };
+        }
+        case CONSTANTS.GET_VEHICLES_BY_BRAND_SUCCESS: {
+            return {
+                ...state,
+                fetchStatus: "success",
+                vehicleList: action.payload,
+            };
+        }
         default:
             return { ...state };
     }

@@ -29,27 +29,27 @@ export default function Home() {
       <main>
         <div className="p-4">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-             {vehicles.vehicleList.map((vehicle: VehicleInterface, index: number) => (
+            {vehicles.vehicleList.map((vehicle: VehicleInterface, index: number) => (
               <CarCard key={vehicle.id} car={vehicle} />
             ))}
           </div>
-      
-          <div className="sticky bottom-0 bg-white py-4 px-4 flex justify-center">
-  <button
-    onClick={() => handlePageChange(currentPage - 1)}
-    // disabled={currentPage === 1}
-    className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2"
-  >
-    Previous
-  </button>
-  <button
-    onClick={() => handlePageChange(currentPage + 1)}
-    // disabled={currentPage === totalPages}
-    className="px-4 py-2 bg-blue-500 text-white rounded-md"
-  >
-    Next
-  </button>
-</div>
+
+          <div className="sticky bottom-0 bg-white py-4 px-4 flex justify-center mt-2">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-4 py-2 bg-black text-white rounded-md mr-2"
+            >
+              Previous
+            </button>
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === 3}
+              className="px-4 py-2 bg-black text-white rounded-md"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </main>
     </>

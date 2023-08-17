@@ -8,7 +8,6 @@ export function getVehicleList(page = 1) {
     if (!apiEndpoint) {
         throw new Error("NEXT_PUBLIC_BASE_API environment variable is not defined.");
     }
-
     const queryParams = qs.stringify({ _page: page, _limit: 5});
 
     return axios.get(`${apiEndpoint}${VEHICLE_ENDPOINT}?${queryParams}`, {
@@ -24,6 +23,19 @@ export function getVehicleById(id: string) {
     }
 
     return axios.get(`${apiEndpoint}${VEHICLE_ENDPOINT}/${id}`, {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+}
+
+export function getVehicleByBrand(brandName: string) {
+    if (!apiEndpoint) {
+        throw new Error("NEXT_PUBLIC_BASE_API environment variable is not defined.");
+    }
+    const queryParams = qs.stringify({ "details.brand": brandName});
+
+    return axios.get(`${apiEndpoint}${VEHICLE_ENDPOINT}?${queryParams}`, {
         headers: {
             "Content-Type": "application/json",
         },

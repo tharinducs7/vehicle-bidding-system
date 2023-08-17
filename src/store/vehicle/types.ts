@@ -44,6 +44,22 @@ export type GetVehicleByIdFailure = {
     payload: string;
 };
 
+/****************************** GET VEHICLE BY BRAND **********************************/
+export type GetVehicleByBrand = {
+    type: typeof CONSTANTS.GET_VEHICLES_BY_BRAND;
+    payload: string
+};
+
+export type GetVehicleByBrandSuccess = {
+    type: typeof CONSTANTS.GET_VEHICLES_BY_BRAND_SUCCESS;
+    payload: VehicleInterface;
+};
+
+export type GetVehicleByBrandFailure = {
+    type: typeof CONSTANTS.GET_VEHICLES_BY_BRAND_FAILURE;
+    payload: string;
+};
+
 export type VehicleActions =
     | GetVehicleList
     | GetVehicleListSuccess
@@ -52,5 +68,8 @@ export type VehicleActions =
     | SetTotalPages
     | GetVehicleById
     | GetVehicleByIdSuccess
-    | GetVehicleByIdFailure;
+    | GetVehicleByIdFailure
+    | GetVehicleByBrand
+    | GetVehicleByBrandSuccess
+    | GetVehicleByBrandFailure;
 

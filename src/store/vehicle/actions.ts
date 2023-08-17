@@ -54,3 +54,23 @@ export const getVehicleByIdFailure = (
     type: CONSTANTS.GET_VEHICLE_BY_ID_FAILURE,
     payload,
 });
+
+// Get vehicles by brand
+export const getVehicleByBrand = (payload: string): types.GetVehicleByBrand => ({
+    type: CONSTANTS.GET_VEHICLES_BY_BRAND,
+    payload
+});
+
+export const getVehicleByBrandSuccess = (
+    payload: VehicleInterface
+): types.GetVehicleByBrandSuccess => ({
+    type: CONSTANTS.GET_VEHICLES_BY_BRAND_SUCCESS,
+    payload,
+});
+
+export const getVehicleByBrandFailure = (
+    payload: string
+): types.GetVehicleByBrandFailure => ({
+    type: CONSTANTS.GET_VEHICLES_BY_BRAND_FAILURE,
+    payload,
+});
