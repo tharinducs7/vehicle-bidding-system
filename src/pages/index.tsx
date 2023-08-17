@@ -1,7 +1,5 @@
-import Head from 'next/head'
-import Image from 'next/image'
-
-import { useEffect, useState } from "react";
+import Head from 'next/head';
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVehicleList, setCurrentPage } from '@/store/vehicle/actions';
 import { CarCard } from '@/components';
@@ -10,11 +8,6 @@ import { VehicleInterface } from '@/utils/interfaces';
 export default function Home() {
   const vehicles = useSelector((state: any) => state.vehicles);
   const currentPage = useSelector((state: any) => state.vehicles.currentPage);
-  const totalPages = useSelector((state: any) => state.vehicles.totalPages);
-
-  const bids = useSelector((state: any) => state.bids);
-
-  const itemsPerPage = 5
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,32 +27,31 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-
-        <div className="text-red p-4">
-         
-
-          <div className="grid gap-4 grid-cols-3">
-            {vehicles.vehicleList.map((vehicle: VehicleInterface, index: Number) => (
+        <div className="p-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+             {vehicles.vehicleList.map((vehicle: VehicleInterface, index: number) => (
               <CarCard key={vehicle.id} car={vehicle} />
             ))}
           </div>
-
-
-<button
-        onClick={() => handlePageChange(currentPage - 1)}
-       // disabled={currentPage === 1}
-      >
-        Previous
-      </button>
-      <button
-        onClick={() => handlePageChange(currentPage + 1)}
-       // disabled={currentPage === totalPages}
-      >
-        Next
-      </button>
-
+      
+          <div className="sticky bottom-0 bg-white py-4 px-4 flex justify-center">
+  <button
+    onClick={() => handlePageChange(currentPage - 1)}
+    // disabled={currentPage === 1}
+    className="px-4 py-2 bg-blue-500 text-white rounded-md mr-2"
+  >
+    Previous
+  </button>
+  <button
+    onClick={() => handlePageChange(currentPage + 1)}
+    // disabled={currentPage === totalPages}
+    className="px-4 py-2 bg-blue-500 text-white rounded-md"
+  >
+    Next
+  </button>
+</div>
         </div>
       </main>
     </>
-  )
+  );
 }

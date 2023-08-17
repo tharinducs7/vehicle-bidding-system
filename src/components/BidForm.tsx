@@ -1,19 +1,20 @@
-// components/BidForm.tsx
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addBid } from "@/store/bids/actions";
-
+import { toast } from 'react-toastify';
 interface BidFormProps {
     vehicleId: number;
     brand: string;
     image: string;
     minBid: number;
-    //onSubmit: (vehicleId: number, bidPrice: number) => void;
+    name: string;
+    year: number;
 }
 
-const BidForm: React.FC<BidFormProps> = ({ vehicleId, brand, image, minBid }) => {
+const BidForm: React.FC<BidFormProps> = ({ vehicleId, brand, image, minBid, name, year }) => {
     const [bidPrice, setBidPrice] = useState('');
     const dispatch = useDispatch();
+
     const handleBidChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         if (!isNaN(parseInt(value)) && parseInt(value) >= 0) {
@@ -30,17 +31,20 @@ const BidForm: React.FC<BidFormProps> = ({ vehicleId, brand, image, minBid }) =>
     };
 
     const handleAddBid = (bidPrice: number) => {
-        console.log(vehicleId, bidPrice, "bidPrice");
+        
         const bid = {
-            vehicleId: vehicleId,
-            brand: brand,
-            image: image,
+            vehicleId,
+            brand,
+            image,
             bidValue: bidPrice,
+            name,
+            year
         };
 
         dispatch(addBid(bid));
+        
+        toast.success("Placed the Bid!");
     };
-
 
     return (
         <div>
@@ -53,8 +57,8 @@ const BidForm: React.FC<BidFormProps> = ({ vehicleId, brand, image, minBid }) =>
             <button
                 onClick={handleSubmit}
                 disabled={!bidPrice || parseInt(bidPrice) < minBid}
-                className="btn btn-info mt-3">
-                Place Bid
+                className="btn btn-success mt-3">
+                <label className='text-white'>Place Bid</label>
             </button>
         </div>
     );

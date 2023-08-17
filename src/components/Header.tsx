@@ -3,16 +3,13 @@ import Link from 'next/link'
 import AuctionItem from "./AcutionItem";
 import { useSelector } from "react-redux";
 import { BidInterface } from '@/utils/interfaces';
+import BiddingList from './BiddingList';
 
 const Header = () => {
   const bids = useSelector((state: any) => state.bids.bids);
 
-  const totalBidValue = bids.reduce((accumulator: any, currentValue: any) => {
-    return accumulator + currentValue.bidValue;
-}, 0);
-
   return (
- <div className="navbar bg-primary text-primary-content">
+ <div className="navbar text-primary-content fixed top-0 left-0 right-0 z-30 bg-slate-500">
   <div className="flex-1">
     <Link className="btn btn-ghost normal-case text-xl" href='/'> Car Portal </Link>
   </div>
@@ -25,34 +22,8 @@ const Header = () => {
         </div>
       </label>
       <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content bg-base-100 shadow w-96">
-        <div className="card-body">
-          <span className="font-bold text-lg">{bids.length} Items</span>
-
-  {bids.map((bid: BidInterface, index: Number) => (
-              <AuctionItem key={bid.vehicleId} bid={bid} />
-            ))}
-
-              
-
-
-          <span className="text-info">Total:  {`${Intl.NumberFormat('en-US', { style: 'currency', currency: 'LKR' }).format(totalBidValue)}`}</span>
-          <div className="card-actions">
-            <button className="btn btn-primary btn-block">View All</button>
-          </div>
-        </div>
+        <BiddingList bids={bids} />
       </div>
-    </div>
-    <div className="dropdown dropdown-end">
-      <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li>
-          <a className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </a>
-        </li>
-        <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
-      </ul>
     </div>
   </div>
 </div>
