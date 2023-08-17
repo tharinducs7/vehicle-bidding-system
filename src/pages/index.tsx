@@ -3,19 +3,27 @@ import Image from 'next/image'
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVehicleList } from '@/store/vehicle/actions';
+import { getVehicleList, setCurrentPage } from '@/store/vehicle/actions';
 import { CarCard } from '@/components';
 import { VehicleInterface } from '@/utils/interfaces';
 
 export default function Home() {
   const vehicles = useSelector((state: any) => state.vehicles);
-  console.log(vehicles, "vehicles here");
+  const currentPage = useSelector((state: any) => state.vehicles.currentPage);
+  const totalPages = useSelector((state: any) => state.vehicles.totalPages);
 
+  const bids = useSelector((state: any) => state.bids);
+
+  const itemsPerPage = 5
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getVehicleList());
-  }, [dispatch]);
+    dispatch(getVehicleList(currentPage));
+  }, [dispatch, currentPage]);
+
+  const handlePageChange = (newPage: number) => {
+    dispatch(setCurrentPage(newPage));
+  };
 
   return (
     <>
@@ -28,13 +36,27 @@ export default function Home() {
       <main>
 
         <div className="text-red p-4">
-          This is a component with Tailwind CSS styles.
+         
 
           <div className="grid gap-4 grid-cols-3">
             {vehicles.vehicleList.map((vehicle: VehicleInterface, index: Number) => (
               <CarCard key={vehicle.id} car={vehicle} />
             ))}
           </div>
+
+
+<button
+        onClick={() => handlePageChange(currentPage - 1)}
+       // disabled={currentPage === 1}
+      >
+        Previous
+      </button>
+      <button
+        onClick={() => handlePageChange(currentPage + 1)}
+       // disabled={currentPage === totalPages}
+      >
+        Next
+      </button>
 
         </div>
       </main>

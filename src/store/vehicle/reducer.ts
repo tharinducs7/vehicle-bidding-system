@@ -27,6 +27,26 @@ export const vehicleReducer = (
                 vehicleList: action.payload,
             };
         }
+        case CONSTANTS.SET_CURRENT_PAGE: {
+            return { ...state, currentPage: action.payload };
+        }
+        case CONSTANTS.SET_TOTAL_PAGES: {
+            return { ...state, totalPages: action.payload };
+        }
+        case CONSTANTS.GET_VEHICLE_BY_ID_FAILURE: {
+            return {
+                ...state,
+                fetchStatus: "fail",
+                error: action.payload,
+            };
+        }
+        case CONSTANTS.GET_VEHICLE_BY_ID_SUCCESS: {
+            return {
+                ...state,
+                fetchStatus: "success",
+                vehicleById: action.payload,
+            };
+        }
         default:
             return { ...state };
     }

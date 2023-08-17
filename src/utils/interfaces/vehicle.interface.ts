@@ -6,10 +6,10 @@ export interface VehicleInterface {
     year: number;
     details: {
         currency: string;
-        price: Number;
+        price: number;
         color: string;
         brand: string;
-        manufactureYear: Number;
+        manufactureYear: number;
         image: string;
         description: string
     }
@@ -17,6 +17,9 @@ export interface VehicleInterface {
 
 export interface VehicleStateInterface {
     vehicleList: VehicleInterface[];
+    vehicleById: VehicleInterface;
     fetchStatus: fetchStatus;
     error: string;
+    currentPage: number,
+    totalPages: number,
 }
