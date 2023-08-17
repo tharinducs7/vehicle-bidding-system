@@ -17,21 +17,20 @@ const BidForm: React.FC<BidFormProps> = ({ vehicleId, brand, image, minBid, name
 
     const handleBidChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
-        if (!isNaN(parseInt(value)) && parseInt(value) >= 0) {
+        if (!isNaN(parseInt(value)) && parseInt(value) > 0) {
             setBidPrice(value);
         }
     };
 
     const handleSubmit = () => {
         const parsedBidPrice = parseInt(bidPrice);
-        if (parsedBidPrice >= minBid) {
+        if (parsedBidPrice >= minBid+1) {
             handleAddBid(parsedBidPrice);
             setBidPrice('');
         }
     };
 
     const handleAddBid = (bidPrice: number) => {
-        
         const bid = {
             vehicleId,
             brand,
@@ -40,10 +39,8 @@ const BidForm: React.FC<BidFormProps> = ({ vehicleId, brand, image, minBid, name
             name,
             year
         };
-
         dispatch(addBid(bid));
-        
-        toast.success("Placed the Bid!");
+        toast.success("Successfully Placed the Bid!");
     };
 
     return (
@@ -52,11 +49,11 @@ const BidForm: React.FC<BidFormProps> = ({ vehicleId, brand, image, minBid, name
                 <label className="label">
                     <span className="label-text">What is your Bid?</span>
                 </label>
-                <input onChange={handleBidChange} type="number" placeholder={`Enter bid (min: ${minBid})`} className="input input-bordered w-full max-w-xs" />
+                <input onChange={handleBidChange} type="number" min={minBid+1} placeholder={`Enter bid (min: ${minBid+1})`} className="input input-bordered w-full max-w-xs" />
             </div>
             <button
                 onClick={handleSubmit}
-                disabled={!bidPrice || parseInt(bidPrice) < minBid}
+                disabled={!bidPrice || parseInt(bidPrice) < minBid+1}
                 className="btn btn-success mt-3">
                 <label className='text-white'>Place Bid</label>
             </button>
