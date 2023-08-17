@@ -1,21 +1,18 @@
 import React from 'react'
-import BiddingList from '@/features/bids/BiddingList'
 import Link from 'next/link'
-
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-
-
-
+import AuctionItem from "./AcutionItem";
+import { useSelector } from "react-redux";
+import { BidInterface } from '@/utils/interfaces';
 
 const Header = () => {
-
   const bids = useSelector((state: any) => state.bids.bids);
-console.log(bids, "bids");
+
+  const totalBidValue = bids.reduce((accumulator: any, currentValue: any) => {
+    return accumulator + currentValue.bidValue;
+}, 0);
 
   return (
- <div className="navbar bg-base-100">
+ <div className="navbar bg-primary text-primary-content">
   <div className="flex-1">
     <Link className="btn btn-ghost normal-case text-xl" href='/'> Car Portal </Link>
   </div>
@@ -27,12 +24,20 @@ console.log(bids, "bids");
           <span className="badge badge-sm indicator-item">{bids.length}</span>
         </div>
       </label>
-      <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
+      <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content bg-base-100 shadow w-96">
         <div className="card-body">
           <span className="font-bold text-lg">{bids.length} Items</span>
-          <span className="text-info">Subtotal: $999</span>
+
+  {bids.map((bid: BidInterface, index: Number) => (
+              <AuctionItem key={bid.vehicleId} bid={bid} />
+            ))}
+
+              
+
+
+          <span className="text-info">Total:  {`${Intl.NumberFormat('en-US', { style: 'currency', currency: 'LKR' }).format(totalBidValue)}`}</span>
           <div className="card-actions">
-            <button className="btn btn-primary btn-block">View cart</button>
+            <button className="btn btn-primary btn-block">View All</button>
           </div>
         </div>
       </div>

@@ -26,7 +26,7 @@ const CarCard = ({ car }: CarCardProps) => {
             <div className="card-body">
                 <h2 className="card-title">
                     {brand} {name}
-                    <div className="badge badge-secondary">NEW</div>
+                    <div className="badge" style={{ backgroundColor: color }}> </div>
                 </h2>
                 <p>  <p className='flex mt-6 text-[32px] leading-[38px] font-extrabold'>
                     <span className='self-start text-[14px] leading-[17px] font-semibold'></span>

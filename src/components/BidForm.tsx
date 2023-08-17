@@ -44,15 +44,12 @@ const BidForm: React.FC<BidFormProps> = ({ vehicleId, brand, image, minBid }) =>
 
     return (
         <div>
-
             <div className="form-control w-full max-w-xs">
                 <label className="label">
                     <span className="label-text">What is your Bid?</span>
                 </label>
                 <input onChange={handleBidChange} type="number" placeholder={`Enter bid (min: ${minBid})`} className="input input-bordered w-full max-w-xs" />
             </div>
-
-
             <button
                 onClick={handleSubmit}
                 disabled={!bidPrice || parseInt(bidPrice) < minBid}

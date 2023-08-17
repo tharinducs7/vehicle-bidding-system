@@ -27,7 +27,7 @@ const VehicleDetails = () => {
 
 
     return (
-        <div className="card lg:card-side bg-base-100 shadow-xl">
+        <div className="card lg:card-side bg-base-100 shadow-xl m-10">
             <figure>
                 <img src={image ? image : dummyCar} alt={name} />
             </figure>
