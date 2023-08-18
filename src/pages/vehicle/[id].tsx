@@ -13,7 +13,7 @@ import Image from 'next/image';
 const VehicleDetails = () => {
     const router = useRouter()
     const dispatch = useDispatch();
-    const [angle, setAngle] = useState(1);
+    const [angle, setAngle] = useState(25);
     const vehicle = useSelector((state: any) => state.vehicles.vehicleById);
 
     const { id, name, details } = vehicle;
